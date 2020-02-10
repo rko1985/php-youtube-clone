@@ -1,5 +1,7 @@
 <?php 
-require_once("includes/header.php"); 
+require_once("includes/header.php");
+require_once("includes/classes/VideoUploadData.php"); 
+require_once("includes/classes/VideoProcessor.php"); 
 
 if(!isset($_POST['uploadButton'])){
     echo "No file sent to page.";
@@ -17,6 +19,8 @@ $videoUploadData = new VideoUploadData(
                                     );
 
 // 2) process video data (upload)
+$videoProcessor = new VideoProcessor($con);
+$wasSuccessful = $videoProcessor->upload($videoUploadData);
 
 // 3) check if upload was successful
 ?>
