@@ -24,7 +24,14 @@ class VideoProcessor {
         }
 
         if(move_uploaded_file($videoData["tmp_name"], $tempFilePath)) {
-            echo "File moved successfully";
+            
+            $finalFilePath = $targetDir . uniqid() . ".mp4";
+
+            if(!$this->insertVideoData($videoUploadData, $finalFilePath)){
+                echo "Insert query failed.";
+                return false;
+            }
+
         }
 
     }
@@ -61,6 +68,10 @@ class VideoProcessor {
 
     private function hasError($data){
         return $data["error"] != 0;
+    }
+
+    private function insertVideoData($uploadData, $filePath){
+        
     }
     
 }
