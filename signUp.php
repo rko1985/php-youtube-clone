@@ -1,6 +1,9 @@
 <?php 
 require_once("includes/config.php");
 require_once("includes/classes/FormSanitizer.php");
+require_once("includes/classes/Account.php");
+
+$account = new Account($con);
 
 if(isset($_POST['submitButton'])){
     $firstName =  FormSanitizer::sanitizeFormString($_POST['firstName']);
@@ -14,9 +17,7 @@ if(isset($_POST['submitButton'])){
     $password =  FormSanitizer::sanitizeFormPassword($_POST['password']);
     $password2 =  FormSanitizer::sanitizeFormPassword($_POST['password2']);
 
-    echo $firstName . "\n";
-    echo $lastName . "\n";
-    echo $email . "\n";
+    $account->register($firstName, $lastName, $username, $email, $email2, $password, $password2);
 }
 
 ?>
