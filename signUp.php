@@ -60,6 +60,9 @@ if(isset($_POST['submitButton'])){
                     <?php echo $account->getError(Constants::$emailTaken); ?>
                     <input type="email" name="email" placeholder="Email" autocomplete="off" required>
                     <input type="email" name="email2" placeholder="Confirm email" autocomplete="off" required>
+                    <?php echo $account->getError(Constants::$passwordsDoNotMatch); ?>
+                    <?php echo $account->getError(Constants::$passwordNotAlphanumeric); ?>
+                    <?php echo $account->getError(Constants::$passwordLength); ?>
                     <input type="password" name="password" placeholder="Password" autocomplete="off" required>
                     <input type="password" name="password2" placeholder="Confirm password" autocomplete="off" required>
                     <input type="submit" name="submitButton" value="Submit">
