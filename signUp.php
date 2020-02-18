@@ -50,6 +50,7 @@ if(isset($_POST['submitButton'])){
                 <form action="signUp.php" method="POST">
                     <?php echo $account->getError(Constants::$firstNameCharacters); ?>
                     <input type="text" name="firstName" placeholder="First Name" autocomplete="off" required>
+                    <?php echo $account->getError(Constants::$lastNameCharacters); ?>
                     <input type="text" name="lastName" placeholder="Last Name" autocomplete="off" required>
                     <input type="text" name="username" placeholder="Username" autocomplete="off" required>
                     <input type="email" name="email" placeholder="Email" autocomplete="off" required>
