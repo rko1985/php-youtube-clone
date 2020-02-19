@@ -24,7 +24,8 @@ class Account {
     }
 
     public function insertUserDetails($fn, $ln, $un, $em, $pw) {
-        return true;
+        
+        $pw = hash("sha512", $pw);
     }
 
     private function validateFirstName($fn) {
