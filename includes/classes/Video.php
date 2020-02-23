@@ -91,6 +91,10 @@ class Video{
         return $data["count"];
     }
 
+    public function like(){
+        return "sandwiches";
+    }
+
 }
 
 ?>
