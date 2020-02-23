@@ -4,7 +4,7 @@ class ButtonProvider {
 
     public static function createButton($text, $imageSrc, $action, $class){
 
-        $image = ($imageSrc == null ? "" : "img src='$imageSrc'");
+        $image = ($imageSrc == null ? "" : "<img src='$imageSrc'>");
 
         //Change action if needed
 
