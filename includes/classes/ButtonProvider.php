@@ -48,7 +48,7 @@ class ButtonProvider {
 
         $button = ButtonProvider::createHyperlinkButton("EDIT VIDEO", null, $href, "edit button");
 
-        return "<div class'editVideoButtonContainer'>
+        return "<div class='editVideoButtonContainer'>
                     $button
                 </div>";
     }
