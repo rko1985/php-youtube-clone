@@ -20,6 +20,7 @@ $userLoggedInObj = new User($con, $usernameLoggedIn);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="assets/js/commonActions.js"></script>
+    <script src="assets/js/userActions.js"></script>
 
 </head>
 
