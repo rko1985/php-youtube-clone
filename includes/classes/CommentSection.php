@@ -14,7 +14,8 @@ class CommentSection {
     }
 
     private function createCommentSection(){
-
+        $numComments = $this->video->getNumberOfComments();
+        echo $numComments;
     }
 
     
