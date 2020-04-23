@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+require_once("ButtonProvider.php");
 
 class Comment{
 
@@ -22,7 +24,31 @@ class Comment{
     }
 
     public function create(){
-        
+        $body = $this->sqlData["body"];
+        $postedBy = $this->sqlData["postedBy"];
+        $profileButton = ButtonProvider::createUserProfileButton($this->con, $postedBy);
+        $timespan = ""; //TODO get timespan
+
+        return "<div class='itemContainer'>
+                    <div class='comment'>
+                        $profileButton
+
+                        <div class='mainContainer'>
+
+                            <div class='commentHeader'>
+                                <a href='profile.php?username=$postedBy'>
+                                    <span class='username'>$postedBy</span>
+                                </a>
+                                <span class='timestamp'>$timespan</span>
+                            </div>
+
+                            <div class='body'>
+                                $body
+                            </div>
+
+                        </div>
+                    </div>
+                </div>";
     }
 
 }
