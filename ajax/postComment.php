@@ -1,6 +1,8 @@
 <?php 
 
     require_once("../includes/config.php");
+    require_once("../includes/classes/User.php");
+    require_once("../includes/classes/Comment.php");
 
     if(isset($_POST['commentText']) && isset($_POST['postedBy']) && isset($_POST['videoId'])){
       
@@ -19,6 +21,9 @@
         $query->execute();
 
         //Return new comment html
+        $userLoggedInObj = new User($con, $_SESSION["userLoggedIn"]);
+        $newComment = new Comment($con, $con->lastInsertId(), $userLoggedInObj, $videoId);
+        echo $newComment->create();
 
     } else {
         echo "One or more parameters are not passed into the subscribe.php file";
