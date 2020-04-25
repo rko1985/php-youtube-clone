@@ -22,7 +22,7 @@ class VideoInfoControls {
 
     private function createLikeButton(){
         $text = $this->video->getLikes();
-        $videoId = $this->video->getid();
+        $videoId = $this->video->getId();
         $action = "likeVideo(this, $videoId)";
         $class = "likeButton";
         $imageSrc = "assets/images/icons/thumb-up.png";
@@ -36,7 +36,7 @@ class VideoInfoControls {
 
     private function createDislikeButton(){
         $text = $this->video->getDislikes();
-        $videoId = $this->video->getid();
+        $videoId = $this->video->getId();
         $action = "dislikeVideo(this, $videoId)";
         $class = "dislikeButton";
         $imageSrc = "assets/images/icons/thumb-down.png";
