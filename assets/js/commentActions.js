@@ -24,7 +24,7 @@ function toggleReply(button){
 
 function likeComment(commentId, button, videoId){
     $.post("ajax/likeComment.php", {commentId: commentId, videoId: videoId})
-    .done(function(data) {
+    .done(function(numToChange) {
         
         var likeButton = $(button);
         var dislikeButton = $(button).siblings(".dislikeButton");
@@ -32,11 +32,10 @@ function likeComment(commentId, button, videoId){
         likeButton.addClass("active");
         dislikeButton.removeClass("active");
 
-        var result = JSON.parse(data);
-        updateLikesValue(likeButton.find(".text"), result.likes)
-        updateLikesValue(dislikeButton.find(".text"), result.dislikes)
-
-        if(result.likes < 0) {
+        var likesCount = $(button).siblings(".likesCount");
+        updateLikesValue(likesCount, numToChange);
+        
+        if(numToChange < 0) {
             likeButton.removeClass("active");
             likeButton.find("img:first").attr("src", "assets/images/icons/thumb-up.png")
         } else {
@@ -49,4 +48,9 @@ function likeComment(commentId, button, videoId){
 
 function dislikeComment(commentId, button, videoId){
 
+}
+
+function updateLikesValue(element, num){
+    var likesCountVal = element.text() || 0;
+    element.text(parseInt(likesCountVal) + parseInt(num));
 }
