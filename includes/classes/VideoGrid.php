@@ -39,8 +39,8 @@ class VideoGrid{
         $elementsHtml = "";
         while($row = $query->fetch(PDO::FETCH_ASSOC)){
             $video = new Video($this->con, $row, $this->userLoggedInObj);
-            $item = new VideoGrideItem($video, $this->largeMode);
-            $elementsHtml .= $items->create();
+            $item = new VideoGridItem($video, $this->largeMode);
+            $elementsHtml .= $item->create();
         }
         return $elementsHtml;
     }
