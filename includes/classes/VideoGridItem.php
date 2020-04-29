@@ -25,7 +25,15 @@ class VideoGridItem{
     }
 
     public function createThumbnail(){
-        return "TEST";
+        $thumbnail = $this->video->getThumbnail();
+        $duration = $this->video->getDuration();
+
+        return "<div class='thumbnail'>
+                    <img src='$thumbnail'>
+                    <div class='duration'>
+                        <span>$duration</span>
+                    </div>
+                </div>";
     }
 
     public function createDetails(){
