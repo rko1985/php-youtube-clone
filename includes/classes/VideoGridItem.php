@@ -48,7 +48,7 @@ class VideoGridItem{
                     <span class='username'>$username</span>
                     <div class='stats'>
                         <span class='viewCount'>$views views - </span>
-                        <span class='timeStamp'>$timestamp - </span>
+                        <span class='timeStamp'>$timestamp</span>
                     </div>
                     $description
                 </div>";
