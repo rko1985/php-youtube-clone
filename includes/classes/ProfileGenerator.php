@@ -19,7 +19,7 @@ class ProfileGenerator{
         }
 
         $coverPhotoSection = $this->createCoverPhotoSection();
-        $headSection = $this->createHeadSection();
+        $headSection = $this->createHeaderSection();
         $tabsSection = $this->createTabsSection();
         $contentSection = $this->createContentSection();
 
@@ -40,8 +40,24 @@ class ProfileGenerator{
                 </div>";
     }
 
-    public function createHeadSection(){
-        
+    public function createHeaderSection(){
+        $profileImage = $this->profileData->getProfilePic();
+        $name = $this->profileData->getProfileUserFullName();
+        $subCount = $this->profileData->getSubscriberCount();
+
+        return "<div class='profileHeader'>
+                    <div class='userInfoContainer'>
+                        <img class='profileImage' src='$profileImage'>
+                        <div class='userInfo'>
+                            <span class='title'>$name</span>
+                            <span class='subscriberCount'>$subCount subscribers</span>
+                        </div>
+                    </div>
+
+                    <div class='buttonContainer'>
+
+                    </div>
+                </div>";
     }
 
     public function createTabsSection(){
