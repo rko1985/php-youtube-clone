@@ -23,7 +23,7 @@ class ProfileGenerator{
         $tabsSection = $this->createTabsSection();
         $contentSection = $this->createContentSection();
 
-        return "<div>
+        return "<div class='profileContainer'>
                     $coverPhotoSection
                     $headSection
                     $tabsSection
