@@ -57,6 +57,26 @@ class Account {
         return $query->execute();
     }
 
+    public function updateDetails($fn, $ln, $em, $un){
+        $this->validateFirstName($fn);
+        $this->validateLastName($ln);
+        $this->validateNewEmail($em, $un);
+
+        if(empty($this->errorArray)){
+            //Update
+            $query = $this->con->prepare("UPDATE users SET firstName = :fn, lastName = :ln, email = :em WHERE username = :un");
+            $query->bindParam("fn", $fn);
+            $query->bindParam("ln", $ln);
+            $query->bindParam("em", $em);
+            $query->bindParam("un", $un);
+
+            return $query->execute();
+        }
+        else {
+            return false;
+        }
+    }
+
     private function validateFirstName($fn) {
         if(strlen($fn) > 25 || strlen($fn) < 2){
             array_push($this->errorArray, Constants::$firstNameCharacters);
@@ -82,7 +102,7 @@ class Account {
         if($query->rowCount() != 0){
             array_push($this->errorArray, Constants::$usernameTaken);
         }
-    }
+    }    
 
     private function validateEmails($em, $em2) {
         if($em != $em2){
@@ -104,6 +124,24 @@ class Account {
         }
     }
 
+    private function validateNewEmail($em, $un) {
+
+        if(!filter_var($em, FILTER_VALIDATE_EMAIL)){
+            array_push($this->errorArray, Constants::$emailInvalid);
+            return;
+        }
+
+        $query = $this->con->prepare("SELECT email FROM users WHERE email=:em AND username != :un");
+        $query->bindParam(":em", $em);
+        $query->bindParam(":un", $un);
+        $query->execute();
+
+        if($query->rowCount() != 0){
+            array_push($this->errorArray, Constants::$emailTaken);
+        }
+    }
+
+
     private function validatePasswords($pw, $pw2) {
         if($pw != $pw2){
             array_push($this->errorArray, Constants::$passwordsDoNotMatch);
@@ -123,6 +161,15 @@ class Account {
     public function getError($error){
         if(in_array($error, $this->errorArray)){
             return "<span class='errorMessage'>$error</span>";
+        }
+    }
+
+    public function getFirstError(){
+        if(!empty($this->errorArray)){
+            return $this->errorArray[0];
+        }
+        else {
+            return "";
         }
     }
     
