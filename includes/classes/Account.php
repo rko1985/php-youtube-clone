@@ -20,7 +20,8 @@ class Account {
 
         if($query->rowCount() == 1){
             return true;
-        } else {
+        } 
+        else {
             array_push($this->errorArray, Constants::$loginFailed);
             return false;
         }
@@ -75,6 +76,37 @@ class Account {
         else {
             return false;
         }
+    }
+
+    public function updatePassword($oldPw,$pw, $pw2, $un){
+        $this->validateOldPassword($oldPw, $un);
+        $this->validatePasswords($pw, $pw2);
+
+        if(empty($this->errorArray)){
+            //Update
+            $query = $this->con->prepare("UPDATE users SET password = :pw WHERE username = :un");
+            $pw = hash("sha512", $pw);
+            $query->bindParam(":pw", $pw);            
+            $query->bindParam(":un", $un);
+
+            return $query->execute();
+        }
+        else {
+            return false;
+        }
+    }
+
+    private function validateOldPassword($oldPw, $un){
+        $pw = hash("sha512", $oldPw);
+
+        $query = $this->con->prepare("SELECT * FROM users WHERE username = :un AND password = :pw");
+        $query->bindParam(":un", $un);
+        $query->bindParam(":pw", $pw);
+
+        $query->execute();
+        if($query->rowCount() == 0){
+            array_push($this->errorArray, Constants::$passwordIncorrect);
+        } 
     }
 
     private function validateFirstName($fn) {
