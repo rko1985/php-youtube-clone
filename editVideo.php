@@ -26,6 +26,7 @@ if($video->getUploadedBy() != $userLoggedInObj->getUsername()){
 <script src="assets/js/editVideoActions.js"></script>
 
 <div class="editVideoContainer column">
+
     <div class="topSection">
         <?php 
             $videoPlayer = new VideoPlayer($video);
@@ -35,7 +36,12 @@ if($video->getUploadedBy() != $userLoggedInObj->getUsername()){
             echo $selectThumbnail->create();
         ?>
     </div>
+
     <div class="bottomSection">
-    
+        <?php  
+            $formProvider = new VideoDetailsFormProvider($con);
+            echo $formProvider->createEditDetailsForm($video);
+        ?>
     </div>
+
 </div>
